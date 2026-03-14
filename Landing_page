@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Poliambulatorio CAM - I nostri servizi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ── TOP ANNOUNCEMENT BAR ── */
+    .announcement-bar {
+      background-color: #2a7bbf;
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── HEADER / NAV ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 60px;
+      /* 🖼️ SOSTITUISCI: cambia "logo.png" con il percorso del tuo logo */
+      object-fit: contain;
+    }
+
+    /* Fallback testo logo se non hai immagine */
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #2a7bbf;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .logo-text span { color: #e8a020; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: #2a7bbf; }
+
+    .nav-phone {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #2a7bbf;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      overflow: hidden;
+      background: #cde0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      /* 🖼️ SOSTITUISCI: cambia src con la tua immagine hero */
+    }
+
+    /* Placeholder hero quando non c'è immagine */
+    .hero-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2a7bbf 0%, #1a5a9a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    .hero-placeholder h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .hero-placeholder p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      max-width: 560px;
+    }
+
+    /* ── SERVIZI SECTION ── */
+    .servizi-section {
+      padding: 70px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #2a7bbf;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #e8a020;
+      margin: 14px auto 0;
+      border-radius: 2px;
+    }
+
+    .servizi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 36px;
+    }
+
+    /* ── CARD SERVIZIO ── */
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+    }
+
+    /* ── IMMAGINE CARD ── */
+    .card-img-wrapper {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: #ddeef9;
+      position: relative;
+    }
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s;
+      /* 🖼️ SOSTITUISCI: cambia src con la tua immagine */
+    }
+    .card:hover .card-img-wrapper img { transform: scale(1.05); }
+
+    /* Placeholder immagine card */
+    .card-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ddeef9, #b5d4ee);
+      color: #2a7bbf;
+      font-size: 3rem;
+    }
+
+    /* ── CORPO CARD ── */
+    .card-body {
+      padding: 24px 22px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-body h3 {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #2a7bbf;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .card-body p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #555;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .btn-scopri {
+      display: inline-block;
+      background: #2a7bbf;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+    .btn-scopri:hover { background: #1a5a9a; }
+
+    /* ── ORARI BANNER ── */
+    .orari-banner {
+      background: #f5f9ff;
+      border-top: 4px solid #2a7bbf;
+      padding: 40px;
+      text-align: center;
+    }
+    .orari-banner h2 {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #2a7bbf;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .orari-banner p {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 6px;
+    }
+    .orari-banner .tel {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #e8a020;
+      margin-top: 10px;
+      display: block;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a2d45;
+      color: #aabdce;
+      padding: 36px 40px;
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+    footer .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    footer p { margin: 0; }
+    footer a { color: #7ab3d9; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 14px; padding: 14px 20px; }
+      nav ul { gap: 16px; flex-wrap: wrap; justify-content: center; }
+      .hero { height: 280px; }
+      .hero-placeholder h1 { font-size: 1.6rem; }
+      .servizi-section { padding: 44px 20px; }
+      footer { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA ANNUNCIO -->
+  <div class="announcement-bar">
+    Per analisi e prelievi siamo aperti dal Lunedì al Sabato dalle 7:30 alle 9:30
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <!-- 🖼️ OPZIONE A: usa un logo immagine -->
+    <!-- <div class="logo"><img src="INSERISCI_QUI_LOGO.png" alt="Logo Poliambulatorio CAM"></div> -->
+
+    <!-- 🖼️ OPZIONE B: logo testo (attivo di default) -->
+    <div class="logo-text">Centro<span>AM</span></div>
+
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Servizi</a></li>
+        <li><a href="#">Prelievi</a></li>
+        <li><a href="#">Contatti</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-phone">📞 351.66.520.40</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!--
+      🖼️ PER INSERIRE L'IMMAGINE HERO:
+      Rimuovi il div .hero-placeholder sotto e decommentare il tag img:
+      <img src="INSERISCI_QUI_IMMAGINE_HERO.jpg" alt="Poliambulatorio CAM">
+    -->
+    <div class="hero-placeholder">
+      <h1>Poliambulatorio CAM</h1>
+      <p>Un team di dottori e professionisti nel settore medico, altamente preparati ed affiatati.</p>
+    </div>
+  </section>
+
+  <!-- SERVIZI -->
+  <section class="servizi-section">
+    <h2 class="section-title">I nostri servizi</h2>
+    <div class="servizi-grid">
+
+      <!-- CARD 1 -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <!--
+            🖼️ PER INSERIRE L'IMMAGINE:
+            Sostituisci il div .card-img-placeholder con:
+            <img src="INSERISCI_QUI_IMMAGINE_1.jpg" alt="Poliambulatorio">
+          -->
+          <div class="card-img-placeholder">🏥</div>
+        </div>
+        <div class="card-body">
+          <h3>Poliambulatorio</h3>
+          <p>Il Poliambulatorio è formato da un <strong>Team di Dottori e Professionisti</strong> nel settore medico, altamente preparati ed affiatati, nato per rispondere alle esigenze sempre crescenti di prevenzione e qualità di diagnosi.</p>
+          <a href="#" class="btn-scopri">Scopri di più &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <!--
+            🖼️ PER INSERIRE L'IMMAGINE:
+            <img src="INSERISCI_QUI_IMMAGINE_2.jpg" alt="Punto Prelievi">
+          -->
+          <div class="card-img-placeholder">🩸</div>
+        </div>
+        <div class="card-body">
+          <h3>Punto Prelievi</h3>
+          <p>Il punto prelievi interno alla nostra struttura mette a disposizione una <strong>gamma completa di esami diagnostici</strong>. <em>Il servizio è anche a domicilio.</em></p>
+          <a href="#" class="btn-scopri">Scopri di più &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <!--
+            🖼️ PER INSERIRE L'IMMAGINE:
+            <img src="INSERISCI_QUI_IMMAGINE_3.jpg" alt="Esami Genetici">
+          -->
+          <div class="card-img-placeholder">🧬</div>
+        </div>
+        <div class="card-body">
+          <h3>Analisi Genetiche</h3>
+          <p>Refertazione di diversi tipi di esami clinici: microbiologici, <strong>test genetici per la predisposizione a malattie</strong>, test prenatali, esami genetici oncologici e molto altro.</p>
+          <a href="#" class="btn-scopri">Scopri di più &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <!--
+            🖼️ PER INSERIRE L'IMMAGINE:
+            <img src="INSERISCI_QUI_IMMAGINE_4.jpg" alt="Check Up">
+          -->
+          <div class="card-img-placeholder">✅</div>
+        </div>
+        <div class="card-body">
+          <h3>Check Up Butterfly</h3>
+          <p><strong>Prevenire è meglio che curare!</strong> Diversi pacchetti di analisi per età e tipologia. Bastano pochi minuti nel nostro punto prelievi e <strong>il referto si scarica online</strong>.</p>
+          <a href="#" class="btn-scopri">Scopri di più &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="card">
+        <div class="card-img-wrapper">
+          <!--
+            🖼️ PER INSERIRE L'IMMAGINE:
+            <img src="INSERISCI_QUI_IMMAGINE_5.jpg" alt="Servizio a Domicilio">
+          -->
+          <div class="card-img-placeholder">🏠</div>
+        </div>
+        <div class="card-body">
+          <h3>Servizio a Domicilio</h3>
+          <p>Sia per i prelievi che per i tamponi offriamo il <strong>servizio a domicilio</strong>: un nostro operatore sanitario verrà presso la vostra abitazione. <strong>Disponibile per privati, enti e aziende.</strong></p>
+          <a href="#" class="btn-scopri">Scopri di più &rsaquo;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BANNER ORARI / CONTATTI -->
+  <div class="orari-banner">
+    <h2>Prenota una visita specialistica</h2>
+    <p>Per prenotazioni visite specialistiche contattaci telefonicamente</p>
+    <span class="tel">📞 351.66.520.40</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <p><strong style="color:#fff">© Poliambulatorio Privato | CAM SRL 2022/23</strong></p>
+        <p>Via Olivè 32L, 37141 Verona Montorio (VR)</p>
+        <p>C.F. e P.IVA 04805280239</p>
+        <p>Direttore sanitario: Dr.ssa Bonetti Ingrid</p>
+        <p>Cap. Soc. 10.000,00 € int. vers. | R.e.a. 447760 VR</p>
+      </div>
+      <div>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a></p>
+        <p style="margin-top:8px; font-size:0.78rem; color:#7a9bb5;">
+          Questo sito utilizza i cookie. Continuando la navigazione si accettano le modalità d'uso.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
